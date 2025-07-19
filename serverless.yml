@@ -40,39 +40,49 @@ functions:
           method: POST
 
   signup:
-      handler: src/functions/signup.handler
-      events:
+    handler: src/functions/signup.handler
+    events:
       - httpApi:
           path: /signup
           method: POST
-  
+
   me:
-      handler: src/functions/me.handler
-      events:
+    handler: src/functions/me.handler
+    events:
       - httpApi:
           path: /me
           method: GET
   
   createMeal:
-      handler: src/functions/create-meal.handler
-      events:
+    handler: src/functions/create-meal.handler
+    events:
       - httpApi:
           path: /meals
           method: POST
 
   listMeals:
-      handler: src/functions/list-meals.handler
-      events:
+    handler: src/functions/list-meals.handler
+    events:
       - httpApi:
           path: /meals
           method: GET
 
   getMealById:
-      handler: src/functions/get-meal-by-id.handler
-      events:
+    handler: src/functions/get-meal-by-id.handler
+    events:
       - httpApi:
           path: /meals/{mealId}
           method: GET
+
+  fileUploadedEvent:
+    handler: src/functions/file-uploaded-event.handler
+    events:
+      - s3:
+          bucket: !Ref UploadsBucket
+          event: s3:ObjectCreated:*
+          existing: true
+          forceDeploy: true
+      
 
 resources:
   Resources:
@@ -80,3 +90,15 @@ resources:
       Type: AWS::S3::Bucket
       Properties:
         BucketName: aws-jstack-foodiary
+    MealsQueue:
+      Type: AWS::SQS::Queue
+      Properties:      
+        QueueName: aws-jstack-meals-queue
+        VisibilityTimeout: 60
+        RedrivePolicy:
+          maxReceiveCount: 1
+          deadLetterTargetArn: !GetAtt MealsDLQ.Arn
+    MealsDLQ:
+      Type: AWS::SQS::Queue
+      Properties:      
+        QueueName: aws-jstack-meals-queue-dlq

@@ -6,7 +6,7 @@ import { parseResponse } from "../utils/parse-response";
 export async function handler(event: APIGatewayProxyEventV2) {
 	const request = parseEvent(event);
 
-	const response = await SignInController.handle(request);
+	const response = await new SignInController().handle(request);
 
 	return parseResponse(response);
 }

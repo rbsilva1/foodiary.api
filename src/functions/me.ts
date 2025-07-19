@@ -12,8 +12,10 @@ export async function handler(event: APIGatewayProxyEventV2) {
 
 		return parseResponse(response);
 	} catch {
-		return parseResponse(unauthorized({
-			message: "Unauthorized access",
-		}));
+		return parseResponse(
+			unauthorized({
+				message: "Unauthorized access",
+			}),
+		);
 	}
 }

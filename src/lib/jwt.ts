@@ -9,7 +9,7 @@ export function verifyJwt(token: string): string | null {
 	try {
 		const { sub } = jwt.verify(token, env.SECRET_KEY) as JwtPayload;
 
-		return sub ?? null;	
+		return sub ?? null;
 	} catch {
 		return null;
 	}

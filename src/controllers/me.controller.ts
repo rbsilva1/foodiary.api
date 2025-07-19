@@ -16,7 +16,7 @@ export class MeController {
 				proteins: true,
 				carbs: true,
 				fats: true,
-			}
+			},
 		});
 
 		return ok({

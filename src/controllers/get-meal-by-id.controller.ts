@@ -6,7 +6,7 @@ import type { HttpResponse, ProtectedHttpRequest } from "../types/http.type";
 import { badRequest, ok } from "../utils/http";
 
 const schema = z.object({
-	mealId: z.uuid()
+	mealId: z.uuid(),
 });
 
 export class GetMealByIdController {

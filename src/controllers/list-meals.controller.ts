@@ -30,7 +30,7 @@ export class ListMealsController {
 				eq(mealsTable.userId, userId),
 				gte(mealsTable.createdAt, result.data.date),
 				lte(mealsTable.createdAt, endDate),
-				eq(mealsTable.status, "success")
+				eq(mealsTable.status, "success"),
 			),
 			columns: {
 				id: true,

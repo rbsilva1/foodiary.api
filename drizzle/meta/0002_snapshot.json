@@ -1,6 +1,6 @@
 {
-	"id": "8cc50033-94b7-4e6d-9338-994d14ce204d",
-	"prevId": "0ac3fb7c-2c27-45e3-a7ec-4e9914a92927",
+	"id": "05047f4a-0c4b-47e1-a45a-7096bee0ae59",
+	"prevId": "8cc50033-94b7-4e6d-9338-994d14ce204d",
 	"version": "7",
 	"dialect": "postgresql",
 	"tables": {
@@ -199,7 +199,7 @@
 		"public.meal_status": {
 			"name": "meal_status",
 			"schema": "public",
-			"values": ["uploading", "queued", "processing", "success", "failed"]
+			"values": ["uploading", "processing", "success", "failed"]
 		}
 	},
 	"schemas": {},

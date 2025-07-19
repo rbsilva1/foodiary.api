@@ -47,7 +47,7 @@ export class SignUpController {
 
 		const goals = calculateGoals({
 			activityLevel: result.data.activityLevel,
-			birthDate: new Date( result.data.birthDate),
+			birthDate: new Date(result.data.birthDate),
 			weight: result.data.weight,
 			height: result.data.height,
 			goal: result.data.goal,

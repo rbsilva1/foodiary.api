@@ -13,6 +13,7 @@ provider:
   runtime: nodejs22.x
   environment:
     DATABASE_URL: ${env:DATABASE_URL}
+    SECRET_KEY: ${env:SECRET_KEY}
 
 package: 
   individually: true

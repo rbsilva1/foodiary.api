@@ -1,8 +1,11 @@
 import { compare } from "bcryptjs";
 import { eq } from "drizzle-orm";
+import jwt from "jsonwebtoken";
 import { z } from "zod";
 import { db } from "../db";
 import { usersTable } from "../db/schema";
+import { env } from "../env";
+import { signJwt } from "../lib/jwt";
 import type { HttpRequest, HttpResponse } from "../types/http.type";
 import { badRequest, ok, unauthorized } from "../utils/http";
 
@@ -44,9 +47,10 @@ export class SignInController {
 			});
 		}
 
+		const accessToken = signJwt(user.id);
+
 		return ok({
-			accessToken: "token de acesso",
-			data: result.data,
+			accessToken,
 		});
 	}
 }

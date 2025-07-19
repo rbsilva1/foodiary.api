@@ -1,8 +1,10 @@
 import { hash } from "bcryptjs";
-import { and, eq } from "drizzle-orm";
+import { eq } from "drizzle-orm";
 import z from "zod";
 import { db } from "../db";
 import { usersTable } from "../db/schema";
+import { calculateGoals } from "../lib/calculateGoals";
+import { signJwt } from "../lib/jwt";
 import type { HttpRequest, HttpResponse } from "../types/http.type";
 import { badRequest, conflict, created } from "../utils/http";
 
@@ -43,6 +45,15 @@ export class SignUpController {
 			});
 		}
 
+		const goals = calculateGoals({
+			activityLevel: result.data.activityLevel,
+			birthDate: new Date( result.data.birthDate),
+			weight: result.data.weight,
+			height: result.data.height,
+			goal: result.data.goal,
+			gender: result.data.gender,
+		});
+
 		const hashedPassword = await hash(result.data.account.password, 10);
 
 		const [user] = await db
@@ -50,19 +61,20 @@ export class SignUpController {
 			.values({
 				...result.data,
 				...result.data.account,
-        password: hashedPassword,
-				calories: 0, // Default values for goals
-				proteins: 0,
-				carbs: 0,
-				fats: 0,
+				password: hashedPassword,
+				calories: goals.calories,
+				proteins: goals.proteins,
+				carbs: goals.carbohydrates,
+				fats: goals.fats,
 			})
 			.returning({
 				id: usersTable.id,
 			});
 
+		const accessToken = signJwt(user.id);
+
 		return created({
-			accessToken: "token de acesso",
-			userId: user.id,
+			accessToken,
 		});
 	}
 }

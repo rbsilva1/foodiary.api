@@ -1,22 +1,22 @@
-import { HttpResponse } from "../types/http.type";
+import type { HttpResponse } from "../types/http.type";
 
 export function ok(body?: Record<string, any>): HttpResponse {
-  return {
-    statusCode: 200,
-    body
-  };
+	return {
+		statusCode: 200,
+		body,
+	};
 }
 
 export function created(body?: Record<string, any>): HttpResponse {
-  return {
-    statusCode: 201,
-    body
-  };
+	return {
+		statusCode: 201,
+		body,
+	};
 }
 
 export function badRequest(body?: Record<string, any>): HttpResponse {
-  return {
-    statusCode: 400,
-    body
-  };
+	return {
+		statusCode: 400,
+		body,
+	};
 }

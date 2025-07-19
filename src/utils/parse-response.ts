@@ -1,8 +1,8 @@
-import { HttpResponse } from "../types/http.type";
+import type { HttpResponse } from "../types/http.type";
 
 export function parseResponse(response: HttpResponse): Record<string, any> {
-  return {
-    statusCode: response.statusCode,
-    body: response.body,
-  };
+	return {
+		statusCode: response.statusCode,
+		body: response.body,
+	};
 }

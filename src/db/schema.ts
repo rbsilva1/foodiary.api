@@ -36,10 +36,7 @@ export const mealStatus = pgEnum("meal_status", [
 	"failed",
 ]);
 
-export const mealInputType = pgEnum("meal_input_type", [
-	"audio",
-	"picture",
-]);
+export const mealInputType = pgEnum("meal_input_type", ["audio", "picture"]);
 
 export const mealsTable = pgTable("meals", {
 	id: uuid("id").primaryKey().defaultRandom(),

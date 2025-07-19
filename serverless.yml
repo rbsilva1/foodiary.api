@@ -11,6 +11,8 @@ provider:
   region: us-east-1
   architecture: arm64
   runtime: nodejs22.x
+  environment:
+    DATABASE_URL: ${env:DATABASE_URL}
 
 package: 
   individually: true
